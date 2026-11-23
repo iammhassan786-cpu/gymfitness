@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GymFitness Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="auth" class="auth">
+    <div class="auth-card">
+      <div class="logo">GYM<span>FITNESS</span></div>
+      <h1 id="authTitle">Welcome Back!</h1>
+      <p>Build your strength. Build your future.</p>
+      <form id="authForm">
+        <input id="authName" placeholder="Your name" autocomplete="name">
+        <input id="authEmail" type="email" placeholder="Email address" required>
+        <input id="authPassword" type="password" placeholder="Password" required>
+        <button id="authSubmit" class="primary">Login</button>
+      </form>
+      <p id="authMessage"></p>
+      <button id="toggleAuth" class="link">Create an account</button>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+    <aside class="sidebar">
+      <div class="logo">GYM<span>FITNESS</span></div>
+      <div class="nav">
+        <button data-page="dashboard" class="active">⌂ Dashboard</button>
+        <button data-page="workouts">▣ Workouts</button>
+        <button data-page="exercises">◈ Exercises</button>
+        <button data-page="tracker">✓ Daily Tracker</button>
+        <button data-page="profile">♙ My Profile</button>
+        <button data-page="admin" id="adminNav" class="hidden">⚙ Admin Panel</button>
+      </div>
+      <button id="logout" class="logout">Logout ↗</button>
+    </aside>
+
+    <main class="main">
+      <header>
+        <div>
+          <h2 id="pageTitle">Dashboard</h2>
+          <p>Welcome to your fitness journey!</p>
+        </div>
+        <div class="user-chip" id="userChip"></div>
+      </header>
+
+      <section id="dashboard" class="page">
+        <div class="hero">
+          <div>
+            <span class="eyebrow">YOUR FITNESS JOURNEY</span>
+            <h1>Stronger Every Day.</h1>
+            <p>Small steps today. Stronger results tomorrow.</p>
+            <button class="primary" data-go="workouts">Explore Workouts</button>
+          </div>
+          <div class="hero-icon">💪</div>
+        </div>
+        <div class="stats">
+          <div class="stat"><span>Workouts Completed</span><strong id="totalDone">0</strong></div>
+          <div class="stat"><span>Today's Progress</span><strong id="todayDone">0%</strong></div>
+          <div class="stat"><span>Available Plans</span><strong id="planCount">0</strong></div>
+        </div>
+        <div class="section-heading"><h2>Today's Workout</h2></div>
+        <div id="todayWorkout" class="cards"></div>
+        <div class="section-heading"><h2>Quick Actions</h2></div>
+        <div class="quick-actions">
+          <button data-go="tracker">✓ Open Tracker</button>
+          <button data-go="profile">♙ My Profile</button>
+          <button data-go="exercises">◈ Browse Exercises</button>
+        </div>
+      </section>
+
+      <section id="workouts" class="page hidden">
+        <div class="section-heading">
+          <h2>Workout Plans</h2>
+          <p>Choose a plan that suits your experience.</p>
+        </div>
+        <div id="workoutCards" class="cards"></div>
+      </section>
+
+      <section id="exercises" class="page hidden">
+        <div class="section-heading">
+          <h2>Exercise Library</h2>
+          <p>Learn the basics of each exercise.</p>
+        </div>
+        <input id="exerciseSearch" class="search" placeholder="Search exercises...">
+        <div id="exerciseCards" class="cards"></div>
+      </section>
+
+      <section id="tracker" class="page hidden">
+        <div class="section-heading">
+          <h2>Daily Workout Tracker</h2>
+          <p>Mark exercises as completed when you finish them.</p>
+        </div>
+        <div class="panel">
+          <h3>Today's Checklist</h3>
+          <div id="trackerList"></div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+          <p id="progressText">0% completed</p>
+          <button id="resetTracker" class="secondary">Reset Today's Tracker</button>
+        </div>
+      </section>
+
+      <section id="profile" class="page hidden">
+        <div class="section-heading"><h2>My Profile</h2></div>
+        <div class="panel profile-panel">
+          <div class="avatar">♙</div>
+          <form id="profileForm">
+            <label>Full Name</label>
+            <input id="profileName" required>
+            <label>Email</label>
+            <input id="profileEmail" disabled>
+            <label>Fitness Goal</label>
+            <select id="profileGoal">
+              <option>General Fitness</option>
+              <option>Build Strength</option>
+              <option>Improve Endurance</option>
+              <option>Stay Active</option>
+              <option>Improve Flexibility</option>
+            </select>
+            <button class="primary">Save Profile</button>
+          </form>
+          <p id="profileMessage"></p>
+        </div>
+      </section>
+
+      <section id="admin" class="page hidden">
+        <div class="section-heading">
+          <h2>Admin Control Center</h2>
+          <p>Manage your GymFitness application.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><span>Total Users</span><strong id="adminUsers">0</strong></div>
+          <div class="stat"><span>Total Plans</span><strong id="adminPlans">0</strong></div>
+          <div class="stat"><span>Completed Workouts</span><strong id="adminDone">0</strong></div>
+        </div>
+
+        <div class="panel">
+          <h3>Add New Workout Plan</h3>
+          <form id="planForm">
+            <input id="planName" placeholder="Workout name" required>
+            <input id="planLevel" placeholder="Level: Beginner / Intermediate" required>
+            <input id="planDuration" placeholder="Duration e.g. 20 minutes" required>
+            <input id="planDescription" placeholder="Description" required>
+            <input id="planExercises" placeholder="Exercises separated by commas" required>
+            <button class="primary">+ Add Workout</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h3>Manage Workout Plans</h3>
+          <div id="adminPlanList"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Registered Users</h3>
+          <div id="adminUserList"></div>
+        </div>
+      </section>
+
+      <footer>© 2026 GymFitness Pro | Keep Moving Forward</footer>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
